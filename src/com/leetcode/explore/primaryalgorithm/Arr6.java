@@ -24,7 +24,7 @@ public class Arr6 {
 				}else {
 					counter.put(a, 1);
 				}
-			}
+			} 
 			List<Integer> resList = new ArrayList<Integer> ();		
 			for(int b:nums2) {
 				if(counter.containsKey(b) && counter.get(b)>0) {
