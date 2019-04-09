@@ -5,7 +5,7 @@ public class Arr3 {
 		public static void main(String args[]) {
 			int[] a = {1,2,3,4,5,6,7};
 			String b = "[ ";
-			rotate(a,3);
+			rotate_once(a,3);
 			for(int i = 0;i<a.length;i++) {
 				b = b+ a[i] + ",";
 			}
@@ -44,7 +44,13 @@ public class Arr3 {
 	        if(nums != null && nums.length >1 ){
 	            int length = nums.length;
 	            int move = k%length;
-	            
+	            int[] newarr = new int[length];
+	            for(int i=0;i<length;i++) {
+	            	 newarr[(i+move)%length] = nums[i] ;
+	            }
+	            for (int i = 0; i < newarr.length; i++) {
+	                nums[i] = newarr[i];
+	            }
 	        }
 	        
 	    }
