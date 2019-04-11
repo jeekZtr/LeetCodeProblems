@@ -11,7 +11,7 @@ public class Arr2 {
                  buy = buy+ ( prices[i] - prices[i-1]);
              }
          } // TODO Auto-generated method stub
-System.out.println(buy);
+         	System.out.println(buy);
 	}
 
 }
