@@ -24,7 +24,7 @@ public class ListNode1 {
     }
 	
 	public static void main(String[] args) {
-	    int[] nums = {4,5,1,9};
+	    int[] nums = {0,0,1,2,4,5,1,9};
 	    ListNode  ln =  initNode(nums); 
 	    while( ln  != null) {
 	        System.out.print(ln.val);
@@ -41,15 +41,15 @@ public class ListNode1 {
 	* @since 2019-04-12
 	 */
 	public  static ListNode initNode(int[] nums) {
-	    ListNode ln1 = new ListNode(4);
-	    ln1.next = new ListNode(5);
-	    ln1.next.next = new ListNode(1);
-	    ln1.next.next.next = new ListNode(9);
-	    System.out.println(1);
-	    
+	    ListNode ln1 = new ListNode(nums[0]);
+	    ListNode ln = ln1; 
+	    for(int i=1;i<nums.length;i++) {
+	        ln1.next = new ListNode(nums[i]);
+	        ln1 = ln1.next;  
+	    }
 	   
 	    
-        return ln1;
+        return ln;
 	}
 	
 	public  static ListNode addNextNode(ListNode node ,int val) {
