@@ -1,5 +1,7 @@
 package com.leetcode.explore.primaryalgorithm;
 
+import java.util.Stack;
+
 public class Others5 {
 	
 	/**
@@ -32,15 +34,30 @@ public class Others5 {
 	 * @return
 	 */
 	public static boolean isValid(String s) {
-		boolean flag = false;
-		String[] left = {"{","[","("};
-		String[] right = {"}","]",")"};
-		
-		
-        return flag;
+		Stack s1 = new Stack();
+		for(int i=0; i< s.length();i++ ) {
+		    String str = s.charAt(i)+"";
+		    System.out.println(str);
+		    if("{".equals( str ) || "[".equals( str) || "(".equals( str ) ) {
+		        s1.push(str);
+		    }else {
+		        if(s1.isEmpty()) {return false;}
+		        if( "}".equals( str ) ) {
+		            if(!"{".equals(s1.pop())) {return false;};   
+		        } 
+		        if( "]".equals( str ) ) {
+		            if(!"[".equals(s1.pop())) {return false;};   
+		        } 
+		        if( ")".equals( str ) ) {
+		            if(!"(".equals(s1.pop())) {return false;};   
+		        } 
+		    }
+		    
+		}
+        return s1.isEmpty();
     }
 	
 	public static void main(String args[]) {
-		System.out.println(isValid(""));
+		System.out.println(isValid("()"));
 	}
 }
