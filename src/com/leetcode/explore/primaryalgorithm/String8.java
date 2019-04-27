@@ -1,7 +1,9 @@
 package com.leetcode.explore.primaryalgorithm;
 
 /**
- * 报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下：
+ * 
+ * 
+ * 	报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下：
 	1.     1
 	2.     11
 	3.     21
@@ -19,16 +21,27 @@ package com.leetcode.explore.primaryalgorithm;
  */
 public class String8 {
 	public static void main(String args[]) {
-		System.out.println(countAndSay(12));
+		System.out.println(countAndSay(30));
 	}
 
 	public static String countAndSay(int n) {
-		String[] val = new String[30];
-		int i= 1;
-		val[0] = "1";
-		while(i<30) {
-			
+		if(n==1) {
+			return "1";
 		}
-		return "";
+		String n1 = countAndSay(n-1);
+		StringBuffer val = new StringBuffer();
+		for(int i=0;i<n1.length();) {
+			int size = 1;
+			for(int j=i+1;j<n1.length();j++) {
+				if(n1.charAt(i) == n1.charAt(j)) {
+					size ++;
+				}else {
+					break;
+				}
+			}
+			val.append(size+""+n1.charAt(i));
+			i+=size;
+		}
+		return val.toString();
 	}
 }
