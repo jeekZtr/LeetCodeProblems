@@ -1,35 +1,64 @@
 package com.leetcode.explore.primaryalgorithm;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class Arr10 {
 	/*
-	 * 	ÅĞ¶ÏÒ»¸ö 9x9 µÄÊı¶ÀÊÇ·ñÓĞĞ§¡£Ö»ĞèÒª¸ù¾İÒÔÏÂ¹æÔò£¬ÑéÖ¤ÒÑ¾­ÌîÈëµÄÊı×ÖÊÇ·ñÓĞĞ§¼´¿É¡£
+	 * æœ‰æ•ˆçš„æ•°ç‹¬
+	 * 
+	 * åˆ¤æ–­ä¸€ä¸ª 9x9 çš„æ•°ç‹¬æ˜¯å¦æœ‰æ•ˆã€‚åªéœ€è¦æ ¹æ®ä»¥ä¸‹è§„åˆ™ï¼ŒéªŒè¯å·²ç»å¡«å…¥çš„æ•°å­—æ˜¯å¦æœ‰æ•ˆå³å¯ã€‚
+		    æ•°å­— 1-9 åœ¨æ¯ä¸€è¡Œåªèƒ½å‡ºç°ä¸€æ¬¡ã€‚
+		    æ•°å­— 1-9 åœ¨æ¯ä¸€åˆ—åªèƒ½å‡ºç°ä¸€æ¬¡ã€‚
+		    æ•°å­— 1-9 åœ¨æ¯ä¸€ä¸ªä»¥ç²—å®çº¿åˆ†éš”çš„ 3x3 å®«å†…åªèƒ½å‡ºç°ä¸€æ¬¡ã€‚
 
-		    Êı×Ö 1-9 ÔÚÃ¿Ò»ĞĞÖ»ÄÜ³öÏÖÒ»´Î¡£
-		    Êı×Ö 1-9 ÔÚÃ¿Ò»ÁĞÖ»ÄÜ³öÏÖÒ»´Î¡£
-		    Êı×Ö 1-9 ÔÚÃ¿Ò»¸öÒÔ´ÖÊµÏß·Ö¸ôµÄ 3x3 ¹¬ÄÚÖ»ÄÜ³öÏÖÒ»´Î¡£
-
+	 * 
 	 */
 	public static void main(String args[]) {
 	}
-	 public boolean isValidSudoku(char[][] board) {
-	        //×îÍâ²ãÑ­»·£¬Ã¿´ÎÑ­»·²¢·ÇÖ»ÊÇ´¦ÀíµÚiĞĞ£¬¶øÊÇ´¦ÀíµÚiĞĞ¡¢µÚiÁĞÒÔ¼°µÚi¸ö3x3µÄ¾Å¹¬¸ñ
-	        for(int i = 0; i < 9; i++){
-	            HashSet<Character> line = new HashSet<>();
-	            HashSet<Character> col = new HashSet<>();
-	            HashSet<Character> cube = new HashSet<>();
-	            for(int j = 0; j < 9; j++){
-	                if('.' != board[i][j] && !line.add(board[i][j]))
-	                    return false;
-	                if('.' != board[j][i] && !col.add(board[j][i]))
-	                    return false;
-	                int m = i/3*3+j/3;
-	                int n = i%3*3+j%3;
-	                if('.' != board[m][n] && !cube.add(board[m][n]))
-	                    return false;
-	            }
-	        }
-	        return true;
-	    }
+	/**
+	 * è§£é¢˜æ€è·¯
+	 * 	åªè¦æ‰€æœ‰çš„ è¡Œ åˆ— å’Œ æ–¹æ ¼ä¸­æ²¡æœ‰ç›¸åŒçš„æ•°å­—å³ä¸º æœ‰æ•ˆçš„æ•°ç‹¬
+	 *   éš¾ç‚¹æ˜¯æ€ä¹ˆè¡¨ç¤º, å’Œæ€ä¹ˆå­˜å‚¨  è¡Œåˆ—æ–¹æ ¼çš„æ•°æ®
+	 *   
+	 *   
+è¾“å…¥:
+[
+  ["5","3",".",".","7",".",".",".","."],
+  ["6",".",".","1","9","5",".",".","."],
+  [".","9","8",".",".",".",".","6","."],
+  ["8",".",".",".","6",".",".",".","3"],
+  ["4",".",".","8",".","3",".",".","1"],
+  ["7",".",".",".","2",".",".",".","6"],
+  [".","6",".",".",".",".","2","8","."],
+  [".",".",".","4","1","9",".",".","5"],
+  [".",".",".",".","8",".",".","7","9"]
+]
+è¾“å‡º: true
+	 * @param board
+	 * @return
+	 */
+	public boolean isValidSudoku(char[][] board) {
+		
+		for(int i=0;i<9;i++) {
+			// åˆ†åˆ«è¡¨ç¤º ç¬¬ i è¡Œ , ç¬¬ i åˆ—, ç¬¬iä¸ª æ–¹æ ¼
+			Set col = new HashSet(); //è¡Œ
+			Set row = new HashSet(); //åˆ—
+			Set cube = new HashSet(); //æ–¹æ ¼
+			for(int j=0;j<9;j++) {
+				if('.'!=board[i][j] && !col.add(board[i][j] ) ){
+					return false;
+				}
+				if('.'!=board[j][i] && !col.add(board[j][i] ) ){
+					return false;
+				}
+				int m = i/3 + j%3;
+				int n = j/3 + i%3;
+				if('.'!=board[m][n] && !col.add(board[m][n] ) ){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 }
