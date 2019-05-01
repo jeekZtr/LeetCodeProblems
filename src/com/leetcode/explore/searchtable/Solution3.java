@@ -1,5 +1,6 @@
 package com.leetcode.explore.searchtable;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -7,6 +8,8 @@ import java.util.Set;
 public class Solution3 {
 
     public static void main(String[] args) {
+    	
+    	System.out.println(isIsomorphic("paper","title"));
     }
     /**
      *  
@@ -36,11 +39,17 @@ public class Solution3 {
     * @author zhngtr-mi
     * @since 2019-04-29
      */
-    public boolean isIsomorphic(String s, String t) {
-        char[] sc = s.toCharArray();
-        char[] tc = s.toCharArray();
-        for(char m : sc) {
-            
+    public static boolean isIsomorphic(String s, String t) {
+        
+    	if(s == null || "".contentEquals(s)) {return false;}
+    	
+        int[] ss = new int[256];
+        int[] tt = new int[256];
+        int len = s.length(); 
+        for(int i=0;i<len;i++) {
+        	if(ss[s.charAt(i)] != tt[t.charAt(i)]) {return false;}
+        	ss[s.charAt(i)] = i + 1;
+        	tt[t.charAt(i)] = i + 1;
         }
         
         return  true;
