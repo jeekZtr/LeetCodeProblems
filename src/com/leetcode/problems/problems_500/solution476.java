@@ -6,9 +6,14 @@ public class solution476 {
         
         Integer i = (int) 2e31;
         
-        
+        int num = 7;
        // System.out.println(Math.pow(0, 0));
-        System.out.println(findComplement(2 ));
+        System.out.println(Integer.toBinaryString( Integer.highestOneBit(num)  ) );
+        System.out.println(Integer.toBinaryString( Integer.highestOneBit(num) -1  ) );
+        System.out.println(Integer.toBinaryString( num & (Integer.highestOneBit(num) - 1)   ) );
+        System.out.println(Integer.toBinaryString( ~num & (Integer.highestOneBit(num) - 1)   ) );
+        
+        System.out.println( num & (Integer.highestOneBit(num) - 1)  );
         
     }
     
