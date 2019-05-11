@@ -259,7 +259,7 @@ public class ArraySort {
     	int temp = left; // 存放结果的数组的初始位置
     	int sortNums = rightEnd - left+1;
 		while(left <= LeftEnd && right <= rightEnd ) {
-			tempArr[left++] = nums[left];
+			//tempArr[left++] = nums[left];
 			if(nums[left] <= nums[right] ) {
 				tempArr[temp++] = nums[left++];
 			}else {
@@ -272,8 +272,13 @@ public class ArraySort {
 		while(right <= rightEnd) {
 			tempArr[temp++] = nums[right++];
 		}
-		
-		for(int i=rightEnd;i>=sortNums;i--){
+		System.out.println("---------------");
+//		for(int i=rightEnd;i>=rightEnd-sortNums+1;i--){
+//			System.out.println("rightEnd--"+i);
+//			nums[rightEnd] = tempArr[rightEnd];
+//		}
+		for(int i=0;i<sortNums;i++,rightEnd--){
+			System.out.println("rightEnd--"+i);
 			nums[rightEnd] = tempArr[rightEnd];
 		}
     }
