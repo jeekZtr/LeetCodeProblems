@@ -11,7 +11,6 @@ public class TestSort {
         //System.out.println(Arrays.toString(arr));
         //as.quickSort(arr, 0, arr.length-1);
         //System.out.println(Arrays.toString(arr));
-        as.selectSort(arr);
         
         System.out.println(Arrays.toString(arr));
     }
