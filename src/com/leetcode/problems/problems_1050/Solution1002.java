@@ -72,6 +72,33 @@ public class Solution1002 {
         }
         return ls;
     }
+    
+    
+    public List<String> commonChars_4ms(String[] A) {
+        List<String> res = new ArrayList<>();
+        int[] count = new int[26], temp = new int[26];
+        Arrays.fill(count, Integer.MAX_VALUE);
+        for(String s : A) {
+            Arrays.fill(temp, 0);
+            for(char ch : s.toCharArray()) {
+                temp[ch - 'a']++;
+            }
+            
+            for(int i = 0; i < 26; i++) {
+                count[i] = Math.min(temp[i], count[i]);
+            }
+        }
+        
+        for(int i = 0; i < 26; i++) {
+            if(count[i] > 0) {
+                for(int j = 0; j < count[i]; j++) {
+                    res.add("" + (char) ('a' + i));
+                }
+            }
+        }
+        
+        return res;
+    }
 }
 
 	
