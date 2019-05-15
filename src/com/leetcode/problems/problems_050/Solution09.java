@@ -1,5 +1,5 @@
 
-package com.leetcode.problems.problems_1;
+package com.leetcode.problems.problems_050;
 
 import java.util.Stack;
 
@@ -7,7 +7,7 @@ import java.util.Stack;
  * 回文数
  */
 
-public class Solution9 {
+public class Solution09 {
 
     public static void main(String[] args) {
         System.out.println(isPalindrome(1212111));

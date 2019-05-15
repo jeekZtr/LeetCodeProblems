@@ -1,4 +1,4 @@
-package com.leetcode.problems.problems_1000;
+package com.leetcode.problems.problems1000;
 
 import java.util.Arrays;
 

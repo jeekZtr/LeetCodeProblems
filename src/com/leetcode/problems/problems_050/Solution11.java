@@ -1,5 +1,5 @@
 
-package com.leetcode.problems.problems_1;
+package com.leetcode.problems.problems_050;
 
 
 /*
