@@ -63,7 +63,8 @@ public class ArraySort {
 //        as.selectionSort(arr); // 选择排序
 //        as.insertionSort(arr); // 简单插入排序
 //        as.ShellSort(arr);
-        as.mergeSort(arr); // 归并 排序
+//        as.mergeSort(arr); // 归并 排序
+        as.heapSort(arr); // 堆排序
         
         System.out.println(Arrays.toString(arr));
     }
@@ -243,6 +244,7 @@ public class ArraySort {
     	int[] tmpA = new int[nums.length];
     	mSort(nums,tmpA,0,nums.length-1);
     }
+    //归并算法的图解  https://blog.csdn.net/jianyuerensheng/article/details/51262984
     public static void mSort(int[] nums,int[] tmpA,int l,int r) {
     	int center;
     	if(l < r) {
@@ -272,18 +274,74 @@ public class ArraySort {
 		while(right <= rightEnd) {
 			tempArr[temp++] = nums[right++];
 		}
-		System.out.println("---------------");
+//		System.out.println("---------------");
+		// 我写的
 //		for(int i=rightEnd;i>=rightEnd-sortNums+1;i--){
 //			System.out.println("rightEnd--"+i);
-//			nums[rightEnd] = tempArr[rightEnd];
+//			nums[i] = tempArr[i];
 //		}
 		for(int i=0;i<sortNums;i++,rightEnd--){
-			System.out.println("rightEnd--"+i);
+//			System.out.println("rightEnd--"+rightEnd);
 			nums[rightEnd] = tempArr[rightEnd];
 		}
     }
+    
+    /*
+     *	 堆排序
+     *  	实现思路，
+     *  		a，将一个无序的序列构成一个堆，根据升序或降序需求选择大顶堆或小顶堆
+     *  		b，将顶元素与末尾元素进行交换，将最大元素“沉”到数组末端
+     *  		c，重新调整结构，使其满足堆定义，然后继续交换堆顶元素与当前末尾元素，反复执行调整+交换步骤，直到整个数组有序
+     * 	 该数组从逻辑上讲就是一个堆结构，我们用简单的公式来描述一下堆的定义就是：
+	 *		大顶堆：arr[i] >= arr[2i+1] && arr[i] >= arr[2i+2]  
+	 *		小顶堆：arr[i] <= arr[2i+1] && arr[i] <= arr[2i+2]  
+     */
+   public static void heapSort(int[] nums){
+	   //1 , 构建大顶堆。
+	   		// 第一个非叶子 子节点，是什么？
+	   int len = nums.length;
+	   for(int i=len/2-1;i>=0;i--){ // 搞懂为什么第一个非叶子节点是 len/2-1 ;
+		   adjustHeap(nums,i,len);
+	   }
+	   // 调整堆结构 + 交换堆顶元素与末尾元素交换
+	   for(int j=len -1;j>0;j--) {
+		   swap(nums,0,j);
+		   adjustHeap(nums,0,j);
+	   }
+   } 
+    
+   /**
+    * 	调整大顶堆（仅是调整过程，建立在大顶堆已构建的基础上）
+    * @param nums
+    * @param i
+    * @param len
+    */
+   private static void adjustHeap(int[] arr, int i, int len) {
+		// TODO Auto-generated method stub
+		// 让 arr【i】 和 arr【2i+1】 和arr【2i+2】 的  三个数比较。   大的放到前面
+	    // 也就是让 父节点和 两个子节点比较位置 ， 然后 大的放到前面               
+	   
+	    int temp = arr[i]; //记录父节点的，值
+	    // 遍历子节点
+	    for(int k=2*i+1;k<len;k++){
+	    	//
+	    	if(k+1 < len && arr[k]<arr[k+1] ) {
+	    		k++;
+	    	}
+	    	
+	    	if(arr[k]>temp){
+	    		arr[i] = arr[k];
+	    		i = k;
+	    	}else {
+	    		break;
+	    	}
+	    }
+	    arr[i] = temp;
+	}
 
-   public static void swap(int[] arr,int x,int y) {
+
+
+public static void swap(int[] arr,int x,int y) {
        int temp = arr[x];
        arr[x] = arr[y];
        arr[y] = temp;
