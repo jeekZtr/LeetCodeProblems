@@ -26,10 +26,10 @@ nums2 = [3, 4]
 public class Solution04 {
 
 	public static void main(String[] args) {
-		int[] nums2 = {1, 2};
-		int[] nums1 = {3, 4};
-		findMedianSortedArrays(nums1,nums2);
-		
+		int[] nums1 = {1, 2};
+		int[] nums2 = {3};
+		findMedianSortedArrays(nums1,null);
+		System.out.println(findMedianSortedArrays(nums1,nums2));
 	}
 	
 	public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
@@ -41,36 +41,47 @@ public class Solution04 {
         if(nums2 != null) {
         	n = nums2.length;
         }
-        double mid = (m+n)/2;
-        int midi = (int)mid;
-        boolean flag = false;
-        if(mid - midi == 0) {
-        	flag = true;
-        }
-        
         int[] temp = new int[m+n];
-        
         int x=0,y=0,index=0;
-        while(x<m && y<n) {
-        	if(nums2!=null && nums1!=null && nums1.length>0 && nums2.length>0 && x<m && y<n && nums1[x] < nums2[y] ) {
+        System.out.println("m--"+m+" , n--" + n);
+        while(x<m || y<n) {
+            System.out.println("x--"+x+" , y--" + y);
+        	if(nums2!=null && nums1!=null && nums1.length>0 && nums2.length>0 && x<m && y<n && nums1[x] <= nums2[y] ) {
         		temp[index] = nums1[x];
         		x++;
-        	}else if(nums2!=null && nums1!=null && nums1.length>0 && nums2.length>0 && x<m && y<n  && nums1[x] > nums2[y] ){
+        		System.out.println("1");
+        	}else if(nums2!=null && nums1!=null && nums1.length>0 && nums2.length>0 && x<m && y<n  && nums1[x] >= nums2[y] ){
         		temp[index] = nums2[y];
         		y++;
-        	}else if(nums2==null && nums1!=null && nums1.length>0  ){
+        		System.out.println("2");
+        	}else if( (nums2==null|| y>=n-1 )&& nums1!=null && nums1.length>0 && x<m   ){
+        	    System.out.println("3");
         		temp[index] = nums1[x];
         		x++;
-        	}else if(nums2!=null && nums1 ==null && nums2.length>0  ){
+        	}else if( nums2!=null && (nums1 ==null || x>=m-1) && nums2.length>0  && y<n ){
         		temp[index] = nums2[y];
         		y++;
+        		System.out.println("4");
         	}
+        	
+        	//System.out.println("index--"+index +" , x--"+x+" , y--" + y);
         	index++;
         }
         
-        System.out.println(Arrays.toString(temp));
+//        System.out.println(Arrays.toString(temp));
         
-        return d/2;
+        double mid = (m+n)/2d;
+        int midi = (int)mid;
+        boolean flag = false;
+        if(mid - midi == 0) {
+            flag = true;
+        }
+        if(flag) {
+            d = ( temp[midi-1] + temp[midi] )/2d;
+        }else {
+            d = temp[midi];
+        }
+        return d;
     }
 
 }
