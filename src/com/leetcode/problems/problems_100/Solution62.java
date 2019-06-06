@@ -4,19 +4,33 @@ import java.math.BigDecimal;
 
 public class Solution62 {
 	 public static void main(String[] args) {
-        System.out.println("asdfasdf   "+ uniquePaths(36,7)  );    
+        System.out.println("asdfasdf   "+ uniquePaths(1,1)  );    
 		 //A(5,5);
 	 }
 	 public static int uniquePaths(int m, int n) {
-	        BigDecimal dd = new BigDecimal(m+n-2);
-	        BigDecimal sum = new BigDecimal(1);
-	        BigDecimal sumdd = new BigDecimal(1);
-	        for(int i=m-1;i>0;i--){
-	            sum = sum.multiply(new BigDecimal(i));
-	            sumdd = sumdd.multiply(dd);
-	            dd = dd.subtract(new BigDecimal(1));
-	        }
-	        return  sumdd.divide(sum).toBigInteger().intValue();
+	     int[][] a = new int[m][n];
+	     for(int i=0;i<a.length;i++) {
+	         for(int j=0;j<a[i].length;j++) {
+	             if(i==0 || j==0) {
+	                 a[i][j] = 1;
+	             }else {
+	                 a[i][j] = a[i-1][j] + a[i][j-1];
+	             }
+	         }
+	     }
+	     
+	     return a[m-1][n-1];
+	 }
+	 public static int uniquePaths_quqiao(int m, int n) {
+	     BigDecimal dd = new BigDecimal(m+n-2);
+	     BigDecimal sum = new BigDecimal(1);
+	     BigDecimal sumdd = new BigDecimal(1);
+	     for(int i=m-1;i>0;i--){
+	         sum = sum.multiply(new BigDecimal(i));
+	         sumdd = sumdd.multiply(dd);
+	         dd = dd.subtract(new BigDecimal(1));
+	     }
+	     return  sumdd.divide(sum).toBigInteger().intValue();
 	 }
 //	  public static int uniquePaths(int m, int n) {
 //	        int sum = 1;
