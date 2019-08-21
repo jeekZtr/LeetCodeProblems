@@ -13,7 +13,7 @@ public class Water {
     */
     public static void main(String[] args) {
     }
-    //单调栈
+    //单调栈   单调栈 leetcode 42题
     public int maxArea(int[] heights){
         Stack<Integer> stack = new Stack<>();
         int result = 0;
